@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; default-src 'self'; base-uri 'self'; form-action 'self'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; style-src 'self' 'unsafe-inline'; default-src 'self'; base-uri 'self'; form-action 'self'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests;">
     <base target="_blank">
     <title>AES测试</title>
     <link rel="icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)">
@@ -12,8 +12,8 @@
   </head>
   <body>
     <main>
-      <input type="text" id="aes-key" placeholder="请输入AES密钥" class="center">
-      <button id="aes-btn" type="button" class="center">提交</button>
+      <input type="text" id="aes-key" placeholder="请输入AES密钥" class="center" style="width: 50vw;">
+      <button id="aes-btn" type="button" class="center" style="display: block;">提交</button>
       <p id="result" class="center"></p>
     </main>
     <footer>
