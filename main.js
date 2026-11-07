@@ -1,28 +1,24 @@
 async function aesGcmDecrypt(keyBytes, cipherBase64) {
-  const key = await crypto.subtle.importKey(
-    'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
-  );
+    const key = await crypto.subtle.importKey(
+        'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+    );
 
-  // 2. Base64 → 字节
-  const buf = Uint8Array.from(atob(cipherBase64), c => c.charCodeAt(0));
+    const buf = Uint8Array.from(atob(cipherBase64), c => c.charCodeAt(0));
 
-  // 3. 按 Python 布局切分：nonce(16) + tag(16) + ct(N)
-  const nonce = buf.slice(0, 16);              // 前 16 字节 = nonce
-  const tag   = buf.slice(16, 32);             // 接下来 16 字节 = tag
-  const ct    = buf.slice(32);                 // 剩余 = 密文
+    const nonce = buf.slice(0, 16); // 前 16 字节 = nonce
+    const tag = buf.slice(16, 32); // 接下来 16 字节 = tag
+    const ct = buf.slice(32); // 剩余 = 密文
 
-  // 4. 重排成 Web Crypto 要的「ct + tag」
-  const data = new Uint8Array(ct.length + tag.length);
-  data.set(ct, 0);
-  data.set(tag, ct.length);
+    const data = new Uint8Array(ct.length + tag.length);
+    data.set(ct, 0);
+    data.set(tag, ct.length);
 
-  // 5. 解密（tagLength 默认 128 位 = 16 字节，和 Python 一致）
-  const plainBuf = await crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv: nonce },
-    key,
-    data
-  );
-  return new TextDecoder().decode(plainBuf);
+    const plainBuf = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: nonce },
+        key,
+        data
+    );
+    return new TextDecoder().decode(plainBuf);
 }
 
 document.getElementById("aes-btn").addEventListener("click", async function() {
