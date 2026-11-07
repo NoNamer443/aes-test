@@ -1,3 +1,5 @@
+document.getElementById("result").textContent = "点击“提交”以校验输入框内容是否正确";
+
 async function aesGcmDecrypt(keyBytes, cipherBase64) {
     const key = await crypto.subtle.importKey(
         'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
