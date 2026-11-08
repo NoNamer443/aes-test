@@ -1,4 +1,11 @@
-document.getElementById("result").textContent = "点击“提交”以校验输入框内容是否正确";
+const result = document.getElementById("result");
+const keyInput = document.getElementById("key-input");
+const aesBtn = document.getElementById("aes-btn");
+let timer;
+const KEY = "key-input";
+
+result.textContent = "点击“提交”以校验输入框内容是否正确";
+keyInput.value = sessionStorage.getItem(KEY) ?? "";
 
 async function aesGcmDecrypt(keyBytes, cipherBase64) {
     const key = await crypto.subtle.importKey(
@@ -23,22 +30,29 @@ async function aesGcmDecrypt(keyBytes, cipherBase64) {
     return new TextDecoder().decode(plainBuf);
 }
 
-document.getElementById("aes-btn").addEventListener("click", async function() {
+keyInput.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        sessionStorage.setItem(KEY, keyInput.value);
+    }, 300);
+});
+
+aesBtn.addEventListener("click", async function() {
     if (!window.crypto || !window.crypto.subtle) {
-        document.getElementById("result").textContent = "当前环境不支持Web Crypto API";
+        result.textContent = "当前环境不支持Web Crypto API";
         return;
     }
-    const aesKey = new TextEncoder().encode(document.getElementById("aes-key").value);
+    const aesKey = new TextEncoder().encode(keyInput.value);
     if (aesKey.length !== 32) {
-        document.getElementById("result").textContent = "输入长度必须为32个字节";
+        result.textContent = "输入长度必须为32个字节";
         return;
     }
 
     try {
         const plaintext = await aesGcmDecrypt(aesKey, "rAQaA5a5obbw+3RQF2dOwNk2TjtCVM6KOuOsp+ZgW9s0UOylLZeddT3+H2daiL/8DPRup5dBOYQHErRxqQ3GPJvF56ce5s8=");
-        document.getElementById("result").textContent = plaintext;
+        result.textContent = plaintext;
     } catch (e) {
         console.error(e);
-        document.getElementById("result").textContent = "解密失败，再试试吧";
+        result.textContent = "解密失败，再试试吧";
     }
 });
