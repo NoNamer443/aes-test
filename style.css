@@ -1,0 +1,8 @@
+#aes-btn,
+#key-input,
+#result {
+    font-size: 2rem;
+}
+#key-input {
+    width: 50vw;
+}

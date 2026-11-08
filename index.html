@@ -2,13 +2,14 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; style-src 'self' 'unsafe-inline'; default-src 'self'; base-uri 'self'; form-action 'self'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; default-src 'self'; base-uri 'self'; form-action 'self'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests;">
     <base target="_blank">
     <title>AES测试</title>
     <link rel="icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)">
     <link rel="icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
     <script defer src="main.js"></script>
   </head>
   <body>
@@ -16,7 +17,7 @@
       <h1>AES测试</h1>
       <a href="instructions.html">说明</a>
     </header>
-    <main style="font-size: 2rem;">
+    <main>
       <input type="text" id="key-input" placeholder="请输入AES密钥" class="center" style="width: 50vw;" maxlength="32">
       <button id="aes-btn" type="button" class="center">提交</button>
       <p id="result" class="center"><noscript>此页面依赖JS，请允许JS以体验网站</noscript></p>
