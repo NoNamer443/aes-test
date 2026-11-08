@@ -1,3 +1,5 @@
+"use strict";
+
 const result = document.getElementById("result");
 const keyInput = document.getElementById("key-input");
 const aesBtn = document.getElementById("aes-btn");
