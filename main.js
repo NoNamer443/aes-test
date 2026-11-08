@@ -39,7 +39,7 @@ keyInput.addEventListener("input", () => {
     }, 300);
 });
 
-aesBtn.addEventListener("click", async function() {
+aesBtn.addEventListener("click", async () => {
     if (!window.crypto || !window.crypto.subtle) {
         result.textContent = "当前环境不支持Web Crypto API";
         return;
