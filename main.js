@@ -11,7 +11,7 @@ keyInput.value = sessionStorage.getItem(KEY) ?? "";
 
 async function aesGcmDecrypt(keyBytes, cipherBase64) {
     const key = await crypto.subtle.importKey(
-        'raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']
+        "raw", keyBytes, { name: "AES-GCM" }, false, ["decrypt"]
     );
 
     const buf = Uint8Array.from(atob(cipherBase64), c => c.charCodeAt(0));
@@ -25,7 +25,7 @@ async function aesGcmDecrypt(keyBytes, cipherBase64) {
     data.set(tag, ct.length);
 
     const plainBuf = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: nonce },
+        { name: "AES-GCM", iv: nonce },
         key,
         data
     );
