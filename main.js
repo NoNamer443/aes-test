@@ -77,7 +77,7 @@ aesBtn.addEventListener("click", async () => {
     }
 
     try {
-        const plaintext = await aesGcmDecrypt(aesKey, "rAQaA5a5obbw+3RQF2dOwNk2TjtCVM6KOuOsp+ZgW9s0UOylLZeddT3+H2daiL/8DPRup5dBOYQHErRxqQ3GPJvF56ce5s8=");
+        const plaintext = await aesGcmDecrypt(aesKey, "hheDgSyqCv7p6Qv2wLgv/k7eyCekgb1tUEH1MmCB4AHbh+aeFd/yGAEPqL27Wt82TGhS3wlKc1gvKUW5o1rhftBUKghPU08=");
         result.textContent = plaintext;
     } catch (e) {
         console.error(e);
