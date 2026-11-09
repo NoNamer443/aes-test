@@ -9,6 +9,32 @@ const KEY = "key-input";
 result.textContent = "点击“提交”以校验输入框内容是否正确";
 keyInput.value = sessionStorage.getItem(KEY) ?? "";
 
+async function aesGcmEncrypt(keyBytes, plaintext) {
+    const key = await crypto.subtle.importKey(
+        'raw', keyBytes, { name: 'AES-GCM' }, false, ['encrypt']
+    );
+
+    const nonce = crypto.getRandomValues(new Uint8Array(16)); // 随机 16 字节 nonce
+    const data = new TextEncoder().encode(plaintext);
+
+    const encBuf = await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv: nonce },
+        key,
+        data
+    );
+
+    const enc = new Uint8Array(encBuf);
+    const ct = enc.slice(0, enc.length - 16); // 前段 = 密文
+    const tag = enc.slice(enc.length - 16);   // 后 16 字节 = tag
+
+    const out = new Uint8Array(nonce.length + tag.length + ct.length);
+    out.set(nonce, 0);                     // [0,16)  = nonce
+    out.set(tag, nonce.length);            // [16,32) = tag
+    out.set(ct, nonce.length + tag.length);// [32,)   = 密文
+
+    return btoa(String.fromCharCode(...out));
+}
+
 async function aesGcmDecrypt(keyBytes, cipherBase64) {
     const key = await crypto.subtle.importKey(
         "raw", keyBytes, { name: "AES-GCM" }, false, ["decrypt"]
