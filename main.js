@@ -86,7 +86,7 @@ async function click() {
 }
 
 aesBtn.addEventListener("click", click);
-keyInput.addEventListener("keydown", async (e) => {
+keyInput.addEventListener("keyup", async (e) => {
     if (e.key === "Enter") {
         await click();
     }
