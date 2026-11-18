@@ -65,7 +65,7 @@ keyInput.addEventListener("input", () => {
     }, 300);
 });
 
-async function click() {
+aesBtn.addEventListener("click", async () => {
     if (!window.crypto || !window.crypto.subtle) {
         result.textContent = "当前环境不支持Web Crypto API";
         return;
@@ -83,11 +83,10 @@ async function click() {
         console.error(e);
         result.textContent = "解密失败，再试试吧";
     }
-}
+});
 
-aesBtn.addEventListener("click", click);
 keyInput.addEventListener("keyup", async (e) => {
     if (e.key === "Enter") {
-        await click();
+        aesBtn.click();
     }
 });
