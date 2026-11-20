@@ -5,5 +5,5 @@
 }
 #key-input {
     width: 50vw;
-    font-family: ui-monospace, "Consolas", monospace;
+    font-family: ui-monospace, "Consolas", "SF Mono", Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", monospace;
 }
